@@ -23,6 +23,8 @@ pub fn adder_macro(input: TokenStream) -> TokenStream {
 
 fn generate_crate_access() -> TokenStream2 {
     match crate_name("adder") {
+        // Doesn't work for test in `adder` crate if we use
+        // Ok(FoundCrate::Itself) => quote! { adder::submod },
         Ok(FoundCrate::Itself) => quote! { crate::submod },
         Ok(FoundCrate::Name(name)) => {
             // This is the case when the crate is being compiled as a proc-macro
